@@ -102,7 +102,9 @@ class RegisterController extends Controller
         $user->verified = 1;
 
         if($user->save()){
-            return view('emailconfirm', ['user' => $user]);
+            $this->guard()->login($user);
+            return redirect('home');
+            //return view('emailconfirm', ['user' => $user]);
         }
     }
 }
