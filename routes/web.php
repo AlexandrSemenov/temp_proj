@@ -17,6 +17,10 @@ Route::get('/', function () {
 
 Route::get('/main', ['uses' => 'MainController@index', 'as' => 'main.index']);
 Auth::routes();
+Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
+Route::post('/register-checkout', ['uses' => 'Auth\RegisterCheckoutController@register', 'as' => 'register-checkout']);
+
+/* Checkout routes */
+Route::get('/checkout', 'CheckoutController@index');
