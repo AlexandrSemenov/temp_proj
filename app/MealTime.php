@@ -8,6 +8,11 @@ class MealTime extends Model
 {
     public function meals()
     {
-        return $this->belongsToMany('App\Meal', 'menu_day_meal');
+        return $this->belongsToMany('App\Meal', 'week_day_meals');
+    }
+
+    public function menu_days()
+    {
+        return $this->belongsToMany('App\MenuDay', 'week_day_meals');
     }
 }

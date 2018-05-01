@@ -22,18 +22,14 @@ class MainController extends Controller
 //            return view('main.index', ['meals' => $menu_day->meals, 'week_day' => $week_day]);
 
 
-            $menu = Menu::where('program_id', '=', 1)->where('subscription_plan_id', '=', 3)->first();
-            $menu_day = $menu->menu_days->where('week_day_id', '=', 2)->first();
-            $meals = $menu_day->meals()->get();
+            $menu = Menu::where('program_id', '=', 1)->first();
+            $menu_day = $menu->menu_days->where('week_day_id', '=', 1)->first();
+            $meals_times = $menu_day->meal_times()->orderBy('order', 'asc')->get();
 
-            foreach ($meals as $meal){
-                var_dump($meal->meal_times);
-            }
-
-//            foreach ($meals as $meal)
-//            {
-//                var_dump($meal);
-//            }
+           foreach ($meals_times as $meals_time)
+           {
+               var_dump($meals_time->meals()->first()->name);
+           }
 
 
         }catch (\ErrorException $e)
