@@ -15,4 +15,9 @@ class MenuDay extends Model
     {
         return $this->belongsToMany('App\Meal', 'menu_day_meal');
     }
+
+    public function week_day()
+    {
+        return $this->belongsTo('App\WeekDay');
+    }
 }
