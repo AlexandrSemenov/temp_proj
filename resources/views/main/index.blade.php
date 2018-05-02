@@ -4,7 +4,7 @@
         <p>День недели: {{$week_day}}</p>
         @foreach($meals as $meal)
             <p>
-                <span>name: {{$meal->name}}, calories: {{$meal->calories}}</span>
+                <span>{{$meal->meal_times->first()->name}}, {{$meal->name}}, calories: {{$meal->calories}}</span>
             </p>
         @endforeach
 
