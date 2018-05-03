@@ -7,7 +7,7 @@
             <li v-for="item in items">@{{ item }}</li>
         </ul>
         <span class="input-group-btn">
-            <button v-on:click="ClickButton" class="btn btn-default" type="button">Add!</button>
+            <button v-on:click="ClickButton" attr-day="1" attr-menu="1" class="btn btn-default" type="button">Add!</button>
         </span>
     </div>
 

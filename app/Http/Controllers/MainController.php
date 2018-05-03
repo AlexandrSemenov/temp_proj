@@ -19,7 +19,7 @@ class MainController extends Controller
     {
         try {
 
-            $meals = $this->menu_repository->MealsOfMenuForDay(1, 2);
+            $meals = $this->menu_repository->MealsOfMenuForDay(1, 1);
 
             return view('main.index', ['meals' => $meals]);
 
