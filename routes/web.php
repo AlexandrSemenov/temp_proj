@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/main', ['uses' => 'MainController@index', 'as' => 'main.index']);
+Route::get('/main/temp', ['uses' => 'MainController@temp', 'as' => 'main.index']);
 Auth::routes();
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
 
