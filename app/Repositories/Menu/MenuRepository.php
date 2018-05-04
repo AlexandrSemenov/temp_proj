@@ -13,6 +13,11 @@ class MenuRepository extends Repository
         parent::__construct($model);
     }
 
+    public function first($id)
+    {
+        return $this->model::find($id);
+    }
+
     public function all()
     {
         return $this->model->all();
@@ -32,7 +37,7 @@ class MenuRepository extends Repository
             ->join('meal_times', 'week_day_meals.meal_time_id', '=', 'meal_times.id')
             ->join('meals', 'week_day_meals.meal_id', '=', 'meals.id')
             ->orderBy('meal_times.order', 'asc')
-            ->select('meal_times.name as time_name', 'meals.name', 'meals.calories', 'meals.weight')
+            ->select('meal_times.name as time_name', 'meals.name', 'meals.calories', 'meals.weight', 'meals.image')
             ->get();
     }
 }

@@ -28,8 +28,24 @@ class MainController extends Controller
         }
     }
 
-    public function temp()
+    public function meals_list()
     {
-        return view('main.temp');
+        $menu = $this->menu_repository->first(1);
+
+        return view('main.temp', ['menu_days' => $menu->menu_days]);
+    }
+
+    public function meals_list_json()
+    {
+        $meals = $this->menu_repository->MealsOfMenuForDay(1, 1);
+
+        return response()->json($meals);
+    }
+
+    public function meals_list_json2()
+    {
+        $meals = $this->menu_repository->MealsOfMenuForDay(1, 2);
+
+        return response()->json($meals);
     }
 }
