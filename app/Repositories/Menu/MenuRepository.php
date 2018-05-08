@@ -32,7 +32,7 @@ class MenuRepository extends Repository
     {
         return DB::table('menus')->where('menus.id', '=', $menu_id)
             ->join('menu_days', 'menus.id', '=', 'menu_days.menu_id')
-            ->where('menu_days.week_day_id', '=', $day_id)
+            ->where('menu_days.id', '=', $day_id)
             ->join('week_day_meals', 'menu_days.id', '=', 'week_day_meals.menu_day_id')
             ->join('meal_times', 'week_day_meals.meal_time_id', '=', 'meal_times.id')
             ->join('meals', 'week_day_meals.meal_id', '=', 'meals.id')

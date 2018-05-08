@@ -78,47 +78,26 @@ module.exports = __webpack_require__(45);
 
 
 
-var data = {
-    items: ['Bananas', 'Apples', 'Bear', 'Monkey', 'Bird'],
-    title: 'My Shopping List'
-};
-
-new Vue({
-    el: '#list',
-    data: data,
-    methods: {
-        ClickButton: function ClickButton(e) {
-            console.log('day: ' + e.target.attributes[0].nodeValue);
-            console.log('menu: ' + e.target.attributes[1].nodeValue);
-        }
-    }
-});
-
 new Vue({
     el: '#meals-list',
     data: {
-        items: []
+        items: [],
+        state: true
     },
-    created: function created() {
-        var _this = this;
-
-        fetch('http://tempproj.loc/main/meals-list-json').then(function (res) {
-            return res.json();
-        }).then(function (data) {
-            _this.items = data;
-        });
-    },
-
     methods: {
         clickBtn: function clickBtn(e) {
-            var _this2 = this;
+            var _this = this;
 
-            console.log(e.target.attributes[0]);
-            fetch('http://tempproj.loc/main/meals-list-json2').then(function (res) {
+            var menu_id = e.target.attributes[0].nodeValue;
+            var day_id = e.target.attributes[1].nodeValue;
+
+            fetch('/main/meals-list-json/' + menu_id + '/' + day_id).then(function (res) {
                 return res.json();
             }).then(function (data) {
-                _this2.items = data;
+                _this.items = data;
             });
+
+            this.state = false;
         }
     }
 });

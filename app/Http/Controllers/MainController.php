@@ -31,21 +31,14 @@ class MainController extends Controller
     public function meals_list()
     {
         $menu = $this->menu_repository->first(1);
-
-        return view('main.temp', ['menu_days' => $menu->menu_days]);
-    }
-
-    public function meals_list_json()
-    {
         $meals = $this->menu_repository->MealsOfMenuForDay(1, 1);
 
-        return response()->json($meals);
+        return view('main.temp', ['menu_id' => $menu->id, 'menu_days' => $menu->menu_days, 'meals' => $meals]);
     }
 
-    public function meals_list_json2()
+    public function meals_list_json($menu_id, $day_id)
     {
-        $meals = $this->menu_repository->MealsOfMenuForDay(1, 2);
-
+        $meals = $this->menu_repository->MealsOfMenuForDay($menu_id, $day_id);
         return response()->json($meals);
     }
 }

@@ -17,8 +17,7 @@ Route::get('/', function () {
 
 Route::get('/main', ['uses' => 'MainController@index', 'as' => 'main.index']);
 Route::get('/main/meals-list', ['uses' => 'MainController@meals_list', 'as' => 'main.meal']);
-Route::get('/main/meals-list-json', ['uses' => 'MainController@meals_list_json', 'as' => 'main.json']);
-Route::get('/main/meals-list-json2', ['uses' => 'MainController@meals_list_json2', 'as' => 'main.json']);
+Route::get('/main/meals-list-json/{menu_id}/{day_id}', ['uses' => 'MainController@meals_list_json', 'as' => 'main.json']);
 
 
 Auth::routes();
@@ -29,3 +28,6 @@ Route::post('/register-checkout', ['uses' => 'Auth\RegisterCheckoutController@re
 
 /* Checkout routes */
 Route::get('/checkout', 'CheckoutController@index');
+
+/* Profile routes */
+Route::get('/profile', ['uses' => 'ProfileController@index', 'as' => 'profile.index', 'middleware' => 'auth']);
