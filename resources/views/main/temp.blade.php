@@ -6,23 +6,21 @@
 
         <div id="meals-list" v-cloak>
 
-            <div class="row" style="margin-bottom: 50px;">
-                @foreach($menu_days as $menu_day)
-                    <button v-on:click="clickBtn" attr-menu="{{$menu_id}}" attr-day="{{$menu_day->id}}">{{$menu_day->week_day()->first()->name}}</button>
-                @endforeach
+            <div class="row py-5 menu">
+
+                <button v-for="menu in menus" :class="{ 'active': menu.id === current_menu}" v-on:click="clickMenuBtn" v-bind:attr-menu="menu.id">@{{menu.name}}</button>
+
+            </div>
+
+            <div class="row py-5 day-button">
+                <button v-for="(day, index) in menu_days" :class="{ 'active': day.week_day_id === current_day}" v-on:click="clickBtn" v-bind:attr-menu="day.menu_id" v-bind:attr-day="day.week_day_id">
+                    @{{ name_days[index] }}
+                </button>
             </div>
 
 
             <div class="row lists">
-
-                @foreach($meals as $meal)
-                    <div v-if="state === true" class="col-md-3 list-item">
-                        <img src="{{$meal->image}}" alt="">
-                        <p>{{$meal->time_name}}, {{$meal->name}}</p>
-                    </div>
-                @endforeach()
-
-                <div v-else class="col-md-3 list-item" v-for="item in items">
+                <div class="col-md-3 list-item" v-for="item in items">
                     <img v-bind:src="item.image" alt="">
                     <p>@{{ item.time_name }}, @{{ item.name }}</p>
                 </div>

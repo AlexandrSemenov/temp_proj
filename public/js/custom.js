@@ -81,23 +81,67 @@ module.exports = __webpack_require__(45);
 new Vue({
     el: '#meals-list',
     data: {
+        menus: [],
         items: [],
-        state: true
+        menu_days: [],
+        name_days: [],
+        current_day: 0,
+        current_menu: 0
     },
+    created: function created() {
+        var _this = this;
+
+        axios.get('/main/start-menu-json').then(function (response) {
+            _this.menus = response.data.list_menus;
+            _this.items = response.data.list_meals;
+            _this.menu_days = response.data.list_menu_days;
+            _this.name_days = response.data.list_days_names;
+            _this.current_menu = response.data.current_menu;
+            _this.current_day = response.data.current_day;
+        });
+    },
+
     methods: {
         clickBtn: function clickBtn(e) {
-            var _this = this;
+            var _this2 = this;
 
             var menu_id = e.target.attributes[0].nodeValue;
             var day_id = e.target.attributes[1].nodeValue;
 
-            fetch('/main/meals-list-json/' + menu_id + '/' + day_id).then(function (res) {
-                return res.json();
-            }).then(function (data) {
-                _this.items = data;
+            axios.get('/main/meals-list-json/' + menu_id + '/' + day_id).then(function (response) {
+                _this2.items = response.data;
             });
 
-            this.state = false;
+            /*--- add class active to button ---*/
+            var current_active = document.querySelector(".day-button .active");
+            current_active.classList.remove("active");
+            e.target.classList.add("active");
+            /*----------------------------------*/
+        },
+        clickMenuBtn: function clickMenuBtn(e) {
+            var _this3 = this;
+
+            var menu_id = e.target.attributes[0].nodeValue;
+
+            axios.get('/main/select-menu-json/' + menu_id).then(function (response) {
+                _this3.menus = response.data.list_menus;
+                _this3.items = response.data.list_meals;
+                _this3.menu_days = response.data.list_menu_days;
+                _this3.name_days = response.data.list_days_names;
+                _this3.current_menu = response.data.current_menu;
+                _this3.current_day = response.data.current_day;
+            });
+
+            var current_active_day = document.querySelector(".day-button .active");
+            current_active_day.classList.remove("active");
+            var new_active_day = document.querySelector('.day-button [attr-day="' + this.current_day + '"]');
+            new_active_day.classList.add("active");
+
+            /*--- add class active to button ---*/
+            var current_active_menu = document.querySelector(".menu .active");
+            current_active_menu.classList.remove("active");
+            e.target.classList.add("active");
+            /*----------------------------------*/
         }
     }
 });

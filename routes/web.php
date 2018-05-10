@@ -18,6 +18,11 @@ Route::get('/', function () {
 Route::get('/main', ['uses' => 'MainController@index', 'as' => 'main.index']);
 Route::get('/main/meals-list', ['uses' => 'MainController@meals_list', 'as' => 'main.meal']);
 Route::get('/main/meals-list-json/{menu_id}/{day_id}', ['uses' => 'MainController@meals_list_json', 'as' => 'main.json']);
+Route::get('/main/first-menu-json', ['uses' => 'MainController@first_menu_json', 'as' => 'main.menu.first']);
+Route::get('/main/days-list-json', ['uses' => 'MainController@days_list_json', 'as' => 'main.days']);
+
+Route::get('/main/start-menu-json', ['uses' => 'MainController@start_menu_json', 'as' => 'menu.start']);
+Route::get('/main/select-menu-json/{id}', ['uses' => 'MainController@select_menu_json', 'as' => 'menu.select']);
 
 
 Auth::routes();

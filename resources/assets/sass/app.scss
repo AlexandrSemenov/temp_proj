@@ -20,3 +20,9 @@
 .list-item{
   text-align: center;
 }
+
+.day-button, .menu{
+  .active{
+    background: cadetblue;
+  }
+}
