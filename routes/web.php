@@ -24,6 +24,10 @@ Route::get('/main/days-list-json', ['uses' => 'MainController@days_list_json', '
 Route::get('/main/start-menu-json', ['uses' => 'MainController@start_menu_json', 'as' => 'menu.start']);
 Route::get('/main/select-menu-json/{id}', ['uses' => 'MainController@select_menu_json', 'as' => 'menu.select']);
 
+Route::get('/cart', ['uses' => 'CartController@index', 'as' => 'cart.index']);
+Route::get('/cart/create/', ['uses' => 'CartController@create', 'as' => 'cart.create']);
+Route::get('/cart/add/', ['uses' => 'CartController@add', 'as' => 'cart.add']);
+
 
 Auth::routes();
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
