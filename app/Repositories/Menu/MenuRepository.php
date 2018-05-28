@@ -4,6 +4,7 @@ namespace App\Reposotories\Menu;
 
 use App\Menu;
 use App\Reposotories\Repository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class MenuRepository extends Repository
@@ -99,5 +100,17 @@ class MenuRepository extends Repository
             ->orderBy('meal_times.order', 'asc')
             ->select('meal_times.name as time_name', 'meals.name', 'meals.calories', 'meals.weight', 'meals.image')
             ->get();
+    }
+
+    public function search(Request $request)
+    {
+        $query = $this->model::orderByDesc('id');
+
+        if ($request->has('name'))
+            $query->where('name', 'like', '%' . $request->get('name') . '%');
+
+        $meals = $query->paginate(20);
+
+        var_dump($meals); die();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Reposotories\Menu\MenuRepository;
+use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
@@ -82,5 +83,10 @@ class MainController extends Controller
     public function select_menu_json($id)
     {
         return response()->json($this->menu_repository->select_menu($id));
+    }
+
+    public function search(Request $request)
+    {
+        return $this->menu_repository->search($request);
     }
 }
